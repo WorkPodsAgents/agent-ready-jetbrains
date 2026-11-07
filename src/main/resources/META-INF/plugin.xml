@@ -1,0 +1,50 @@
+<idea-plugin>
+    <id>ai.workpods.agentready</id>
+    <name>Agent Ready Website Audit</name>
+    <vendor url="https://workpods.ai" email="yours@workpods.ai">WorkPods</vendor>
+
+    <description><![CDATA[
+<p>Run an SEO and AI search audit of any web page without leaving the IDE: see it the way Google, ChatGPT,
+Perplexity and AI agents read it. No account or API key needed.</p>
+
+<p>Open <b>Tools | Agent Ready Website Audit</b> and choose:</p>
+<ul>
+  <li><b>SEO Audit of a Page</b>: indexing, title and meta description, headings, schema markup (JSON-LD),
+  links, image alt text and AI readiness, with each problem and its evidence.</li>
+  <li><b>Check AI Crawler Access</b>: whether GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended
+  and more may read a page, from robots.txt, meta tags and headers.</li>
+  <li><b>Check robots.txt, Sitemaps and llms.txt</b>: plus the agent files under /.well-known.</li>
+</ul>
+
+<p>The summary appears as a notification with <b>Open Report</b>, a shareable report page kept for 30 days,
+and <b>Show Details</b>, which opens the full result as JSON in an editor tab.</p>
+
+<p>The checks run on the hosted <a href="https://workpods.ai/tools/agent-ready">Agent Ready Website Audit</a> server at
+mcp.workpods.ai, which fetches only the public page you enter. It records the domain and path it checked, never
+the query string, your IP address or the page text. Read the
+<a href="https://workpods.ai/privacy#agent-ready-mcp">privacy policy</a>. It never signs in, submits
+forms or changes a site.</p>
+]]></description>
+
+    <change-notes><![CDATA[
+<p>0.1.0: SEO Audit of a Page, Check AI Crawler Access, and Check robots.txt, Sitemaps and llms.txt.</p>
+]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Agent Ready" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <group id="AgentReady.Menu" text="Agent Ready Website Audit" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <action id="AgentReady.CheckPage" class="ai.workpods.agentready.CheckPageAction"
+                    text="SEO Audit of a Page…" description="Run an SEO and AI search audit of a web page"/>
+            <action id="AgentReady.CheckAiCrawlers" class="ai.workpods.agentready.CheckAiCrawlersAction"
+                    text="Check AI Crawler Access…" description="Check which AI crawlers may read a page"/>
+            <action id="AgentReady.CheckSiteFiles" class="ai.workpods.agentready.CheckSiteFilesAction"
+                    text="Check robots.txt, Sitemaps and llms.txt…" description="Read a site's robots.txt, sitemaps, llms.txt and agent files"/>
+        </group>
+    </actions>
+</idea-plugin>
